@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>My Workout tracker</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<h1>Hello everyone, this is my workout tracker!</h1>
+	<form action="/log-workout" method="POST">
+		<label for="exercise">Exercise: </label>
+		<input type="text" id="exercise" name="exercise"> <br>
+		<label for="weight">Weight: </label>
+		<input type="number" id="weight" name="weight"> <br>
+		<label for="reps">Reps: </label>
+		<input type="number" id="reps" name="reps"> <br>
+		<input type="submit" value="submit">
+	</form>
+	<br>
+	<div class="div-w-list">
+		<ul class="w-list">
+
+		</ul>
+	</div>
+	<script src="./main.js"></script> 
+</body>
+</html>

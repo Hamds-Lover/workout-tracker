@@ -1,0 +1,30 @@
+/* Keep existing styles, add these */
+    .workout-edit input {
+        width: 60px;
+        margin: 0 5px;
+        padding: 3px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    .workout-edit input:first-child {
+        width: 100px;
+    }
+    .edit-btn, .save-btn, .del-work {
+        margin: 0 3px;
+        padding: 3px 8px;
+        cursor: pointer;
+        background: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+    .del-work {
+        background: #f44336;
+    }
+    .edit-btn {
+        background: #2196F3;
+    }
+    .save-btn {
+        background: #ff9800;
+    }
