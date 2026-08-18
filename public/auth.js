@@ -57,7 +57,7 @@ async function signupUser(username, password){
 
 async function checkAut(){
 	try{
-		const response = await fetch('api/auth/me');
+		const response = await fetch('/api/auth/me');
 		if(!response.ok){
 			return null;
 		}
