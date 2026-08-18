@@ -6,6 +6,19 @@ const wList = document.querySelector('.w-list');
 
 // helper functions
 
+function formatDate(dateString) {
+    if (!dateString) return 'Just now';
+    const date = new Date(dateString);
+    // Example: "Dec 25, 2025, 2:30 PM"
+    return date.toLocaleString('en-US', { 
+        month: 'short', 
+        day: 'numeric', 
+        year: 'numeric', 
+        hour: 'numeric', 
+        minute: '2-digit' 
+    });
+}
+
 async function getData() {
 	const response = await fetch('/api/workouts');
 	if (!response.ok) {
@@ -30,7 +43,7 @@ async function loadData() {
 			//container for the workout display
 			const displayCont = document.createElement('span');
 			displayCont.className = 'workout-display';
-			displayCont.textContent = `Exercise: ${workout.exercise}, weight: ${workout.weight}Kg for ${workout.reps} reps. `;
+			displayCont.textContent = `Exercise: ${workout.exercise}, weight: ${workout.weight}Kg for ${workout.reps} reps, (${formatDate(workout.created_at)}) `;
 			// Edit form container
 			const editCont = document.createElement('span');
 			editCont.className = 'workout-edit';
