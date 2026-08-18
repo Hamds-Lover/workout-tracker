@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>My Workout tracker</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Workout Tracker</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-	<h1>Hello everyone, this is my workout tracker!</h1>
-	<form action="/log-workout" method="POST">
-		<label for="exercise">Exercise: </label>
-		<input type="text" id="exercise" name="exercise"> <br>
-		<label for="weight">Weight: </label>
-		<input type="number" id="weight" name="weight"> <br>
-		<label for="reps">Reps: </label>
-		<input type="number" id="reps" name="reps"> <br>
-		<input type="submit" value="submit">
-	</form>
-	<br>
-	<div class="div-w-list">
-		<ul class="w-list">
+    <!-- User info bar -->
+    <div id="user-info" style="display:none;" class="user-bar">
+        <span>Welcome, <span id="username-display"></span>!</span>
+        <button id="logout-btn" class="logout-btn">Logout</button>
+    </div>
 
-		</ul>
-	</div>
-	<script src="./main.js"></script> 
+    <!-- Workout section -->
+    <div id="workout-section" style="display:none;">
+        <h1>My Workout Tracker</h1>
+
+        <form action="/log-workout" method="POST">
+            <label for="exercise">Exercise</label>
+            <input type="text" id="exercise" name="exercise" placeholder="e.g., Bench Press">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" id="weight" name="weight" placeholder="80">
+            <label for="reps">Reps</label>
+            <input type="number" id="reps" name="reps" placeholder="10">
+            <input type="submit" value="Log Workout">
+        </form>
+
+        <br>
+
+        <button id="show-list">Show Saved Workouts</button>
+        
+        <br><br>
+
+        <div class="div-w-list">
+            <ul class="w-list"></ul>
+        </div>
+    </div>
+
+    <!-- Loading state -->
+    <div id="loading" style="display:block;">
+        <p>Loading...</p>
+    </div>
+
+    <script src="/main.js"></script>
 </body>
 </html>
