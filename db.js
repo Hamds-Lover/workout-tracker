@@ -1,15 +1,12 @@
-// db connection stuff
-
-// requires
 const { Pool } = require('pg');
 require('dotenv').config();
+const isProduction = process.env.NODE_ENV === 'prod';
 
-// connections/connections pool
 const pool =  new Pool({
 	connectionString: process.env.DATABASE_URL,
-	ssl: {
+	ssl: isProduction? {
 		rejectUnauthorized : false
-	}
+	} : false
 });
 
 module.exports = {
