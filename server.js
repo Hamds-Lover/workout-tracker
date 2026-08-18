@@ -70,7 +70,7 @@ app.post('/log-workout', requireAuth, async (req, res) => {
 app.get('/api/workouts', requireAuth, async (req, res) => {
 	const userId = req.session.userId;
 	try {
-		const result = await db.query('SELECT * FROM workouts WHERE id = $1 ORDER BY id ASC', [userId]);
+		const result = await db.query('SELECT * FROM workouts WHERE user_id = $1 ORDER BY id ASC', [userId]);
 		res.json(result.rows);
 	} catch (error) {
 		console.error("DB ERROR!", error);
