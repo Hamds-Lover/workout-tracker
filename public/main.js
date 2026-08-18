@@ -1,5 +1,7 @@
 // Base url
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = window.location.origin + "/api";
+
+console.log("Base url: " + BASE_URL);
 
 async function getData() {
 	const url = `${BASE_URL}/workouts`;
