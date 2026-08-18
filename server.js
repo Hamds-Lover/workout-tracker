@@ -79,7 +79,7 @@ app.get('/api/workouts', requireAuth, async (req, res) => {
 });
 
 // delete route
-app.delete('//api/delete/:id', requireAuth, async (req, res)=>{
+app.delete('/api/delete/:id', requireAuth, async (req, res)=>{
 	const userId = req.session.userId;
 	const vals = [parseInt(req.params.id, 10), userId];
 	try{
@@ -95,7 +95,7 @@ app.delete('//api/delete/:id', requireAuth, async (req, res)=>{
 });
 
 // workout update
-app.put('//api/update/:id', requireAuth, async (req, res)=>{
+app.put('/api/update/:id', requireAuth, async (req, res)=>{
 	const id = parseInt(req.params.id, 10);
 	const {exercise, weight, reps} = req.body;
 	const userId = req.session.userId;
