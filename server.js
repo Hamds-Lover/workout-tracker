@@ -16,7 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('trust proxy', 1);
+
 // session middleware
+
 app.use(session({
 	store : new pgSession({
 		conString : process.env.DATABASE_URL,
