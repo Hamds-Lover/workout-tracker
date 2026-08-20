@@ -1,130 +1,162 @@
-/* Keep existing styles, add these */
-    .workout-edit input {
-        width: 60px;
-        margin: 0 5px;
-        padding: 3px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-    .workout-edit input:first-child {
-        width: 100px;
-    }
-    .edit-btn, .save-btn, .del-work {
-        margin: 0 3px;
-        padding: 3px 8px;
-        cursor: pointer;
-        background: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 3px;
-        font-size: 12px;
-    }
-    .del-work {
-        background: #f44336;
-    }
-    .edit-btn {
-        background: #2196F3;
-    }
-    .save-btn {
-        background: #ff9800;
-    }
+/* ================================
+   WORKOUT TRACKER - FIXED CSS
+   Uses your existing selectors
+   ================================ */
 
+:root {
+    --bg: #f3f6fb;
+    --card: rgba(255, 255, 255, 0.92);
+    --text: #182438;
+    --muted: #66728a;
+    --line: #dbe3f0;
+    --blue: #2f7cf6;
+    --blue-dark: #215fd0;
+    --green: #18a05c;
+    --green-dark: #107544;
+    --red: #e5484d;
+    --red-dark: #c53036;
+    --orange: #ff9800;
+    --shadow: 0 10px 30px rgba(20, 35, 70, 0.08);
+    --shadow-sm: 0 2px 10px rgba(20, 35, 70, 0.05);
+    --radius: 18px;
+    --transition: all 0.2s ease;
+}
 
-    /* Reset & Base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f0f2f5;
-    color: #333;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: 100vh;
+html {
+    color-scheme: light;
 }
 
-/* --- Auth Page Styles --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(47, 124, 246, 0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(24, 160, 92, 0.06), transparent 25%),
+        var(--bg);
+    color: var(--text);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px;
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+a {
+    color: var(--blue);
+}
+
+/* ================================
+   AUTH PAGE
+   ================================ */
+
 .auth-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 48px);
+    padding: 12px;
 }
 
 .auth-box {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 34px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.65);
     width: 100%;
-    max-width: 400px;
+    max-width: 430px;
 }
 
 .auth-box h1 {
     text-align: center;
-    margin-bottom: 30px;
-    color: #1a1a2e;
+    margin-bottom: 8px;
+    color: var(--text);
+    font-size: 2rem;
+    letter-spacing: -0.04em;
 }
 
 .auth-form h2 {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     text-align: center;
-    color: #1a1a2e;
+    color: var(--muted);
+    font-size: 1.15rem;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
-.form-group input {
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 650;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.auth-form input {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border-color 0.3s;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    font-size: 15px;
+    background: #fff;
+    transition: var(--transition);
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.auth-form input:focus {
     outline: none;
-    border-color: #4a90d9;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(47, 124, 246, 0.12);
 }
 
 .auth-btn {
     width: 100%;
     padding: 12px;
     border: none;
-    border-radius: 6px;
+    border-radius: 14px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: var(--transition);
+    margin-top: 8px;
 }
 
 .primary-btn {
-    background: #4a90d9;
+    background: linear-gradient(135deg, var(--blue), #5aa2ff);
     color: white;
+    box-shadow: 0 12px 24px rgba(47, 124, 246, 0.18);
 }
 
 .primary-btn:hover {
-    background: #357abd;
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    transform: translateY(-1px);
 }
 
 .auth-switch {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 16px;
     font-size: 14px;
-    color: #666;
+    color: var(--muted);
 }
 
 .auth-switch a {
-    color: #4a90d9;
+    color: var(--blue);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .auth-switch a:hover {
@@ -132,180 +164,429 @@ body {
 }
 
 .error-message {
-    background: #fee;
-    color: #c0392b;
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 10px;
+    background: rgba(229, 72, 77, 0.1);
+    color: var(--red-dark);
+    padding: 11px 12px;
+    border-radius: 12px;
+    margin-top: 12px;
     font-size: 14px;
+    border: 1px solid rgba(229, 72, 77, 0.18);
 }
 
-/* --- Main App Styles --- */
-.user-bar {
+/* ================================
+   MAIN APP
+   ================================ */
+
+#workout-section {
+    display: none;
+    animation: fadeIn 0.25s ease;
+}
+
+/* User bar / logout */
+.user-bar,
+#user-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    gap: 14px;
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
     margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
 }
 
-.logout-btn {
-    background: #e74c3c;
-    color: white;
+/* Hidden until JS confirms auth */
+#user-info {
+    display: none;
+}
+
+#username-display {
+    font-weight: 800;
+    color: var(--text);
+}
+
+.logout-btn,
+#logout-btn {
+    background: rgba(229, 72, 77, 0.12);
+    color: var(--red-dark);
     border: none;
-    padding: 6px 16px;
-    border-radius: 4px;
+    padding: 9px 14px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: 700;
+    transition: var(--transition);
 }
 
-.logout-btn:hover {
-    background: #c0392b;
+.logout-btn:hover,
+#logout-btn:hover {
+    background: var(--red);
+    color: white;
+    transform: translateY(-1px);
 }
 
 h1 {
-    color: #1a1a2e;
-    margin-bottom: 20px;
+    color: var(--text);
+    margin-bottom: 18px;
+    font-size: 2rem;
+    letter-spacing: -0.04em;
 }
 
-form {
-    background: white;
+/* ================================
+   ADD WORKOUT FORM
+   ================================ */
+
+form:not(.auth-form) {
+    background: var(--card);
+    backdrop-filter: blur(10px);
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 12px;
+    margin-bottom: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    align-items: flex-end;
 }
 
-form label {
-    font-weight: 600;
-    font-size: 14px;
-    color: #555;
+form:not(.auth-form) label {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--muted);
+    flex: 1 1 150px;
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+form:not(.auth-form) input[type="text"],
+form:not(.auth-form) input[type="number"] {
     width: 100%;
-}
-
-form input[type="text"],
-form input[type="number"] {
-    flex: 1;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
     font-size: 14px;
-    min-width: 80px;
+    background: #fff;
+    transition: var(--transition);
 }
 
-form input[type="submit"] {
-    background: #2ecc71;
-    color: white;
+/* If inputs are direct children instead of inside labels */
+form:not(.auth-form) > input[type="text"],
+form:not(.auth-form) > input[type="number"] {
+    flex: 1 1 130px;
+    width: auto;
+    min-width: 110px;
+}
+
+form:not(.auth-form) input[type="text"]:focus,
+form:not(.auth-form) input[type="number"]:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(47, 124, 246, 0.12);
+}
+
+form:not(.auth-form) input[type="submit"],
+#show-list {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 0 18px;
     border: none;
-    padding: 8px 24px;
-    border-radius: 4px;
+    border-radius: 13px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 800;
     font-size: 14px;
+    transition: var(--transition);
 }
 
-form input[type="submit"]:hover {
-    background: #27ae60;
+form:not(.auth-form) input[type="submit"] {
+    background: rgba(24, 160, 92, 0.13);
+    color: var(--green-dark);
+}
+
+form:not(.auth-form) input[type="submit"]:hover {
+    background: var(--green);
+    color: white;
+    transform: translateY(-1px);
 }
 
 #show-list {
-    background: #4a90d9;
-    color: white;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
+    background: rgba(47, 124, 246, 0.13);
+    color: var(--blue-dark);
 }
 
 #show-list:hover {
-    background: #357abd;
+    background: var(--blue);
+    color: white;
+    transform: translateY(-1px);
 }
 
-ul {
+/* ================================
+   WORKOUT LIST
+   ================================ */
+
+ul,
+.w-list {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-ul li {
-    background: white;
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+ul li,
+.w-list li {
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    margin-bottom: 0;
+    box-shadow: var(--shadow-sm);
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    transition: var(--transition);
+}
+
+ul li:hover,
+.w-list li:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+    border-color: #c9d7f3;
+}
+
+.workout-display {
+    flex: 1 1 320px;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* Button container created by JS has no class, so target last span */
+ul li > span:last-child,
+.w-list li > span:last-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+/* ================================
+   EDIT MODE
+   ================================ */
+
+.workout-edit {
+    flex: 1 1 340px;
+}
+
+/*
+   main.js toggles:
+   editCont.style.display = 'inline'
+   editCont.style.display = 'none'
+
+   This makes it visually nicer when visible without breaking JS.
+*/
+.workout-edit[style*="inline"] {
+    display: inline-flex !important;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 8px;
 }
 
 .workout-edit input {
-    padding: 4px 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 60px;
+    width: 86px;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    transition: var(--transition);
 }
 
+.workout-edit input.edit-exercise,
 .workout-edit input:first-child {
-    width: 100px;
+    width: 150px;
+    flex: 1 1 150px;
 }
+
+.workout-edit input:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(47, 124, 246, 0.12);
+}
+
+/* ================================
+   BUTTONS
+   ================================ */
 
 button {
-    padding: 4px 12px;
+    padding: 9px 12px;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 800;
+    transition: var(--transition);
 }
 
 .edit-btn {
-    background: #3498db;
-    color: white;
+    background: rgba(47, 124, 246, 0.13);
+    color: var(--blue-dark);
 }
 
 .edit-btn:hover {
-    background: #2980b9;
+    background: var(--blue);
+    color: white;
+    transform: translateY(-1px);
 }
 
 .save-btn {
-    background: #2ecc71;
-    color: white;
+    background: rgba(24, 160, 92, 0.14);
+    color: var(--green-dark);
 }
 
 .save-btn:hover {
-    background: #27ae60;
+    background: var(--green);
+    color: white;
+    transform: translateY(-1px);
 }
 
 .cancel-btn {
-    background: #95a5a6;
-    color: white;
+    background: rgba(102, 114, 138, 0.14);
+    color: #4d5b74;
 }
 
 .cancel-btn:hover {
-    background: #7f8c8d;
-}
-
-.del-work-1 {
-    background: #e74c3c;
+    background: #66728a;
     color: white;
+    transform: translateY(-1px);
 }
 
+.del-work,
+.del-work-1 {
+    background: rgba(229, 72, 77, 0.12);
+    color: var(--red-dark);
+}
+
+.del-work:hover,
 .del-work-1:hover {
-    background: #c0392b;
+    background: var(--red);
+    color: white;
+    transform: translateY(-1px);
 }
 
-/* Loading state */
+/* ================================
+   LOADING
+   ================================ */
+
 #loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     text-align: center;
-    color: #888;
+    color: var(--muted);
     font-size: 18px;
-    padding: 50px;
+    font-weight: 700;
+    padding: 60px 20px;
+}
+
+#loading::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid rgba(47, 124, 246, 0.18);
+    border-top-color: var(--blue);
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 700px) {
+    body {
+        padding: 14px;
+    }
+
+    .user-bar,
+    #user-info {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .logout-btn,
+    #logout-btn {
+        width: 100%;
+    }
+
+    form:not(.auth-form) {
+        padding: 16px;
+    }
+
+    form:not(.auth-form) label {
+        flex: 1 1 100%;
+    }
+
+    form:not(.auth-form) input[type="submit"],
+    #show-list {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    ul li,
+    .w-list li {
+        align-items: flex-start;
+    }
+
+    .workout-display {
+        width: 100%;
+    }
+
+    ul li > span:last-child,
+    .w-list li > span:last-child {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
+    }
+
+    .workout-edit[style*="inline"] {
+        width: 100%;
+    }
+
+    .workout-edit input,
+    .workout-edit input.edit-exercise,
+    .workout-edit input:first-child {
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .workout-edit button {
+        flex: 1 1 auto;
+    }
 }
