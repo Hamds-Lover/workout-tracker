@@ -1,0 +1,83 @@
+/* ================================
+   APP LAYOUT
+   User bar, section wrapper, loading state.
+   Used by index.html only. Requires base.css.
+   ================================ */
+
+#workout-section {
+    display: none;
+    animation: fadeIn 0.25s ease;
+}
+
+/* Element carries both id="user-info" and class="user-bar" */
+.user-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+/* Hidden until JS confirms auth - higher specificity than .user-bar */
+#user-info {
+    display: none;
+}
+
+#username-display {
+    font-weight: 800;
+    color: var(--text);
+}
+
+.logout-btn {
+    background: rgba(229, 72, 77, 0.12);
+    color: var(--red-dark);
+    padding: 9px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.logout-btn:hover {
+    background: var(--red);
+    color: white;
+    transform: translateY(-1px);
+}
+
+#loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 18px;
+    font-weight: 700;
+    padding: 60px 20px;
+}
+
+#loading::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid rgba(47, 124, 246, 0.18);
+    border-top-color: var(--blue);
+    animation: spin 0.7s linear infinite;
+}
+
+@media (max-width: 700px) {
+    .user-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .logout-btn {
+        width: 100%;
+    }
+}

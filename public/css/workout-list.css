@@ -1,0 +1,160 @@
+/* ================================
+   WORKOUT LIST
+   List items, inline edit mode, per-row action buttons.
+   Used by index.html only. Requires base.css.
+   ================================ */
+
+.w-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.w-list li {
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    transition: var(--transition);
+}
+
+.w-list li:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+    border-color: #c9d7f3;
+}
+
+.workout-display {
+    flex: 1 1 320px;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* The button container main.js creates has no class, so target last span */
+.w-list li > span:last-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+/* Edit mode -
+   main.js toggles editCont.style.display between 'inline' and 'none';
+   this attribute selector makes that visible state lay out nicely
+   without needing any JS changes. */
+.workout-edit {
+    flex: 1 1 340px;
+}
+
+.workout-edit[style*="inline"] {
+    display: inline-flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.workout-edit input {
+    width: 86px;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    transition: var(--transition);
+}
+
+.workout-edit input.edit-exercise,
+.workout-edit input:first-child {
+    width: 150px;
+    flex: 1 1 150px;
+}
+
+.workout-edit input:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(47, 124, 246, 0.12);
+}
+
+.edit-btn {
+    background: rgba(47, 124, 246, 0.13);
+    color: var(--blue-dark);
+}
+
+.edit-btn:hover {
+    background: var(--blue);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.save-btn {
+    background: rgba(24, 160, 92, 0.14);
+    color: var(--green-dark);
+}
+
+.save-btn:hover {
+    background: var(--green);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.cancel-btn {
+    background: rgba(102, 114, 138, 0.14);
+    color: #4d5b74;
+}
+
+.cancel-btn:hover {
+    background: #66728a;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.del-work {
+    background: rgba(229, 72, 77, 0.12);
+    color: var(--red-dark);
+}
+
+.del-work:hover {
+    background: var(--red);
+    color: white;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 700px) {
+    .w-list li {
+        align-items: flex-start;
+    }
+
+    .workout-display {
+        width: 100%;
+    }
+
+    .w-list li > span:last-child {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
+    }
+
+    .workout-edit[style*="inline"] {
+        width: 100%;
+    }
+
+    .workout-edit input,
+    .workout-edit input.edit-exercise,
+    .workout-edit input:first-child {
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .workout-edit button {
+        flex: 1 1 auto;
+    }
+}

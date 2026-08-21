@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏋️</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏋️</text></svg>">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Workout Tracker</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/app-layout.css">
+    <link rel="stylesheet" href="/css/workout-form.css">
+    <link rel="stylesheet" href="/css/workout-list.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <!-- User info bar -->
     <div id="user-info" style="display:none;" class="user-bar">
@@ -31,7 +39,7 @@
         <br>
 
         <button id="show-list">Show Saved Workouts</button>
-        
+
         <br><br>
 
         <div class="div-w-list">
@@ -43,7 +51,49 @@
     <div id="loading" style="display:block;">
         <p>Loading...</p>
     </div>
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" style="display:none;">
+        <h2>Your Dashboard</h2>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="total-workouts">0</div>
+                <div class="stat-label">Total Workouts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-volume">0</div>
+                <div class="stat-label">Total Volume (kg)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="top-exercise">-</div>
+                <div class="stat-label">Most Frequent</div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+            <div class="chart-container">
+                <h3>Weekly Volume</h3>
+                <canvas id="volume-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Exercise Breakdown</h3>
+                <canvas id="breakdown-chart"></canvas>
+            </div>
+        </div>
+
+        <!-- Personal Records -->
+        <div class="pr-section">
+            <h3>Personal Records (Max Weight)</h3>
+            <ul id="pr-list" class="pr-list"></ul>
+        </div>
+    </div>
+
+    <!-- Dashboard Toggle Button -->
+    <button id="toggle-dashboard" class="toggle-btn">Show Dashboard</button>
 
     <script src="/main.js"></script>
 </body>
+
 </html>

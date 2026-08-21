@@ -3,6 +3,8 @@ const userInfo = document.getElementById('user-info');
 const usernameDisplay = document.getElementById('username-display');
 const loading = document.getElementById('loading');
 const wList = document.querySelector('.w-list');
+let volumeChart = null;
+let breakdownChart = null;
 
 // helper functions
 
@@ -184,6 +186,138 @@ async function logoutUser(){
 	window.location.href = '/auth.html';
 }
 
+async function loadStats(){
+	try{
+		const response = await fetch('/api/stats');
+		if(!response.ok){
+			throw new Error('Failed to get stats');
+		}
+		const data = await response.json();
+
+		// update stat cards
+		document.getElementById('total-workouts').textContent = data.totalWorkouts;
+		document.getElementById('total-volume').textContent = data.totalVolume.toLocaleString();
+		document.getElementById('top-exercise').textContent = data.topExercise;
+
+		// render personal records
+		const prList = document.getElementById('pr-list');
+		prList.innerHTML = '';
+		if(data.personalRecords.length === 0){
+			prList.innerHTML = '<li style="grid-column: 1/-1; text-align: center; color: #6c757d;">No records Yet. Log some workouts!</li>';
+		}else{
+			data.personalRecords.forEach(pr=>{
+				const li = document.createElement('li');
+				li.innerHTML = `<span class="pr-exercise">${pr.exercise}</span><span class="pr-weight">${pr.max_weight} kg</span>`;
+				prList.appendChild(li);
+			});
+		}
+
+		// render volume chart
+		const ctx1 = document.getElementById('volume-chart').getContext('2d');
+		const weekLabels = data.weeklyData.map(d=>{
+			const date = new Date(d.week);
+			return date.toLocaleString('en-US', {month: 'short', day: 'numeric'});
+		});
+		const volumeData = data.weeklyData.map(d=>d.volume);
+
+		if(volumeChart){
+			volumeChart.destroy();
+		}
+
+		volumeChart = new Chart(ctx1,{
+			type: 'bar',
+			data: {
+				labels: weekLabels.length ? weekLabels : ['No Data'],
+				datasets: [{
+					label: 'Volume (Kg)',
+					data: volumeData.length ? volumeData : [0],
+					backgroundColor: '#4a90d9',
+					borderColor: '#357abd',
+					borderWidth: 1,
+	                borderRadius: 4,
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: true,
+				plugins: {
+					legend: { display: false },
+				},
+				scales: {
+					y: {
+						beginAtZero: true,
+						grid: { color: 'rgba(0,0,0,0.05)' },
+					},
+					x: {
+						grid: { display: false },
+					}
+				}
+			}
+		});
+
+		// Render breakdown chart
+		const ctx2 = document.getElementById('breakdown-chart').getContext('2d');
+		const exerciseNames = data.exerciseBreakdown.map(e=>e.exercise);
+		const exerciseCounts = data.exerciseBreakdown.map(e=>e.count);
+		const colors = ['#4a90d9', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6', '#1abc9c', '#e67e22', '#3498db'];
+
+		if(breakdownChart){
+			breakdownChart.destroy();
+		}
+		breakdownChart = new Chart(ctx2, {
+           	type: 'doughnut',
+            data: {
+                labels: exerciseNames.length ? exerciseNames : ['No Data'],
+                datasets: [{
+                    data: exerciseCounts.length ? exerciseCounts : [1],
+                    backgroundColor: exerciseNames.length ? colors.slice(0, exerciseNames.length) : ['#e9ecef'],
+                    borderWidth: 2,
+                    borderColor: 'white',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 12,
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                cutout: '60%',
+            }
+		});
+	} catch (error){
+        console.error('Stats error:', error);
+        document.querySelector('.stats-grid').innerHTML = '<div class="stat-card" style="grid-column: 1/-1; text-align: center; color: #e74c3c;">Error loading stats. Please try again.</div>';
+    }
+}
+
+// dashboard toggle
+let dashboardVisible = false;
+const dashboardSection = document.getElementById('dashboard-section');
+const toggleBtn = document.getElementById('toggle-dashboard');
+
+toggleBtn.addEventListener('click', async () => {
+	dashboardVisible = !dashboardVisible;
+	if(dashboardVisible){
+		dashboardSection.style.display = 'block';
+		toggleBtn.textContent = "Hide Dashboard";
+		await loadStats();
+	}else{
+		dashboardSection.style.display = 'none';
+		toggleBtn.textContent = 'Show dashboard';
+
+		// Destroy charts to free mem
+		if(volumeChart){volumeChart.destroy(); volumeChart = null;}
+		if (breakdownChart){breakdownChart.destroy(); breakdownChart = null;}
+	}
+});
+
 // auth check status
 
 async function checkAuthAndInit(){
@@ -204,6 +338,10 @@ async function checkAuthAndInit(){
 
 		// load workouts
 		await loadData();
+
+		// Hide dashboard by default
+		dashboardSection.style.display = 'none';
+		toggleBtn.textContent = 'Show dashboard';
 
 		// setup logout
 		document.getElementById('logout-btn').addEventListener('click', async()=>{

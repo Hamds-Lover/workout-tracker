@@ -239,6 +239,44 @@ app.post('/api/auth/logout', (req, res)=>{
 	});
 });
 
+// for dashboard
+app.get('/api/stats', requireAuth, async (req, res)=>{
+	const userId = req.session.userId;
+
+	try{
+		// total workout count
+		const totalResult = await db.query('SELECT COUNT(*) FROM workouts WHERE user_id = $1', [userId]);
+
+		// total volume
+		const volumeResult = await db.query('SELECT COALESCE(SUM(weight*reps),0) FROM workouts WHERE user_id = $1', [userId]);
+
+		// Most frequent exercise
+		const topExerciseResult = await db.query('SELECT exercise, COUNT(*) as count FROM workouts WHERE user_id = $1 GROUP BY exercise ORDER BY count DESC LIMIT 1', [userId]);
+
+		// PR
+		const prResult = await db.query('SELECT exercise, MAX(weight) as max_weight FROM workouts WHERE user_id = $1 GROUP BY exercise ORDER BY max_weight DESC', [userId]);
+
+		// weekly data
+		const weeklyResult = await db.query("SELECT DATE_TRUNC('week', created_at) as week, COALESCE(SUM(weight*reps),0) as volume, COUNT(*) as count FROM workouts WHERE user_id = $1 GROUP BY week ORDER BY week DESC LIMIT 8", [userId]);
+
+		// exercise breakdown
+		const exerciseBreakdown = await db.query('SELECT exercise, COUNT(*) as count FROM workouts WHERE user_id = $1 GROUP BY exercise ORDER BY count DESC', [userId]);;
+		
+		res.json({
+			totalWorkouts: parseInt(totalResult.rows[0].count),
+			totalVolume: parseInt(volumeResult.rows[0].coalesce),
+			topExercise: topExerciseResult.rows[0]?.exercise || 'None',
+			topExerciseCount: topExerciseResult.rows[0]?.count || 0,
+			personalRecords: prResult.rows,
+			weeklyData: weeklyResult.rows.reverse(),
+			exerciseBreakdown: exerciseBreakdown.rows
+		});
+	} catch (error){
+		console.error("Stats error: ", error);
+		res.status(500).json({error: 'failed to load statistics'});
+	}
+});
+
 // 404 handling
 app.use((req, res) => {
 	res.status(404).sendFile(path.join(__dirname, 'public', 'handlepoo.html'));

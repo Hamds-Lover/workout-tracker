@@ -1,0 +1,151 @@
+/* ================================
+   DASHBOARD
+   Stats cards, charts, personal records.
+   Used by index.html only. Requires base.css.
+   ================================ */
+
+#dashboard-section {
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    padding: 24px 20px;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: var(--shadow);
+    margin: 20px 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 16px 14px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    background: #ffffff;
+}
+
+.stat-number {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+.charts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 18px 0;
+}
+
+.chart-container {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.chart-container h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.pr-section {
+    margin-top: 18px;
+}
+
+.pr-section h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+}
+
+.pr-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+}
+
+.pr-list li {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.pr-list li:hover {
+    background: #ffffff;
+}
+
+.pr-list li .pr-exercise {
+    font-weight: 600;
+}
+
+.pr-list li .pr-weight {
+    color: var(--blue);
+    font-weight: 700;
+}
+
+.toggle-btn {
+    background: rgba(47, 124, 246, 0.12);
+    color: var(--blue-dark);
+    padding: 10px 20px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 12px 0;
+}
+
+.toggle-btn:hover {
+    background: var(--blue);
+    color: white;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 700px) {
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .charts-row {
+        grid-template-columns: 1fr;
+    }
+
+    .pr-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
